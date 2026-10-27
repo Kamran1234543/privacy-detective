@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Detective</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1224;
+    color: #f1f5f9;
+    line-height: 1.6;
+  }
+  header {
+    text-align: center;
+    padding: 45px 20px;
+    background: linear-gradient(135deg, #172554, #164e63);
+  }
+  header h1 { font-size: 2.5rem; margin: 0; }
+  header p { color: #cbd5e1; }
+  main { max-width: 850px; margin: auto; padding: 20px; }
+  section {
+    background: #172033;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 22px 0;
+  }
+  h2 { color: #67e8f9; }
+  button {
+    background: #0891b2;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 5px 3px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  button:hover { background: #0e7490; }
+  button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+  }
+  .answer { display: block; width: 100%; text-align: left; }
+  #feedback {
+    padding: 12px;
+    border-radius: 8px;
+    background: #25344a;
+    margin-top: 14px;
+  }
+  a { color: #67e8f9; }
+  .small { color: #cbd5e1; font-size: .95rem; }
+  footer { text-align: center; padding: 20px; color: #cbd5e1; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🕵️ Privacy Detective</h1>
+  <p>Investigate digital privacy. Make smart choices. Know your rights.</p>
+  <p>Complete the cases to earn your detective score!</p>
+</header>
+
+<main>
+  <section>
+    <h2>🔎 Case 1: The Location Mystery</h2>
+    <p>
+      Imagine a navigation app continues collecting a user's
+      location even when the user is not using it. The app's
+      privacy notice is unclear.
+    </p>
+    <p><strong>What is the biggest ethical concern?</strong></p>
+    <button class="answer" onclick="check(0, 0)">
+      A. The app uses too much battery.
+    </button>
+    <button class="answer" onclick="check(0, 1)">
+      B. The app may collect sensitive location data without
+      users clearly understanding or expecting it.
+    </button>
+    <button class="answer" onclick="check(0, 2)">
+      C. All location tracking is automatically illegal.
+    </button>
+    <p id="feedback0" role="status" aria-live="polite">
+      Choose an answer to investigate the case.
+    </p>
+  </section>
+
+  <section>
+    <h2>⚖️ Case 2: Ethics or Law?</h2>
+    <p>
+      A company designs an app that requests access to a user's
+      contacts, even though this information is not needed for
+      the app's main purpose.
+    </p>
+    <p><strong>Which statement is most accurate?</strong></p>
+    <button class="answer" onclick="check(1, 0)">
+      A. It is always illegal to request contacts.
+    </button>
+    <button class="answer" onclick="check(1, 1)">
+      B. It may raise ethical concerns; whether it breaks a law
+      depends on the facts and applicable legal requirements.
+    </button>
+    <button class="answer" onclick="check(1, 2)">
+      C. If an app can collect data, collecting it is always ethical.
+    </button>
+    <p id="feedback1" role="status" aria-live="polite">
+      Choose an answer to investigate the case.
+    </p>
+  </section>
+
+  <section>
+    <h2>🛡️ Case 3: Protect a Young User</h2>
+    <p>
+      A commercial game website is designed for children under
+      13 and wants to collect their personal information.
+    </p>
+    <p><strong>Which U.S. law is especially relevant?</strong></p>
+    <button class="answer" onclick="check(2, 0)">
+      A. COPPA — the Children's Online Privacy Protection Act.
+    </button>
+    <button class="answer" onclick="check(2, 1)">
+      B. A law that only regulates road traffic.
+    </button>
+    <button class="answer" onclick="check(2, 2)">
+      C. No privacy law can apply to websites.
+    </button>
+    <p id="feedback2" role="status" aria-live="polite">
+      Choose an answer to investigate the case.
+    </p>
+  </section>
+
+  <section>
+    <h2>🏆 Detective Results</h2>
+    <p id="score" aria-live="polite">Score: 0 / 3</p>
+    <p id="result">Solve all three cases to see your result.</p>
+    <button onclick="resetQuiz()">Restart Cases</button>
+  </section>
+
+  <section>
+    <h2>📚 Evidence Room: Sources</h2>
+    <p>
+      <strong>1. COPPA — U.S. federal law</strong><br>
+      <a href="https://www.ftc.gov/legal-library/browse/statutes/childrens-online-privacy-protection-act"
+         target="_blank" rel="noopener noreferrer">
+        Federal Trade Commission: COPPA
+      </a>
+    </p>
+    <p>
+      <strong>2. COPPA implementing regulation</strong><br>
+      <a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"
+         target="_blank" rel="noopener noreferrer">
+        Federal Trade Commission: Children's Online Privacy Protection Rule
+      </a>
+    </p>
+    <p>
+      <strong>3. Digital privacy background</strong><br>
+      <a href="https://www.eff.org/issues/privacy"
+         target="_blank" rel="noopener noreferrer">
+        Electronic Frontier Foundation: Privacy
+      </a>
+    </p>
+    <p class="small">
+      Jurisdiction: United States, federal law. COPPA applies to
+      covered services and circumstances; not every website or
+      instance of data collection is covered.
+    </p>
+  </section>
+</main>
+
+<footer>
+  Privacy Detective | Think ethically. Code responsibly.
+</footer>
+
+<script>
+const correctAnswers = [1, 1, 0];
+const explanations = [
+  [
+    "Battery use can matter, but the central ethical issue is privacy.",
+    "Correct! Location data can reveal sensitive routines and places. Users should understand what is collected and why.",
+    "Incorrect. Location tracking is not automatically illegal in every situation. Context and applicable law matter."
+  ],
+  [
+    "Incorrect. Requesting contact access is not automatically illegal in every situation.",
+    "Correct! Ethical design means collecting only what is reasonably needed. Legal compliance depends on the facts and relevant laws.",
+    "Incorrect. Technical ability does not make a choice ethical. Developers should consider privacy, consent, and potential harm."
+  ],
+  [
+    "Correct! COPPA is a U.S. federal law that protects children's online privacy in specified circumstances.",
+    "Incorrect. Road traffic laws do not address this central online privacy issue.",
+    "Incorrect. Privacy laws can apply to websites and online services."
+  ]
+];
+
+let answered = [false, false, false];
+let score = 0;
+
+function check(question, choice) {
+  if (answered[question]) return;
+
+  answered[question] = true;
+  const isCorrect = choice === correctAnswers[question];
+
+  if (isCorrect) score++;
+
+  const feedback = document.getElementById("feedback" + question);
+  feedback.textContent =
+    (isCorrect ? "✅ Correct! " : "❌ Not quite. ") +
+    explanations[question][choice];
+
+  updateResults();
+}
+
+function updateResults() {
+  document.getElementById("score").textContent =
+    "Score: " + score + " / 3";
+
+  if (answered.every(Boolean)) {
+    document.getElementById("result").textContent =
+      score === 3
+        ? "Excellent detective work! You understand the key ideas."
+        : "Cases complete! Review the explanations, then restart to try again.";
+  } else {
+    document.getElementById("result").textContent =
+      "Cases solved: " + answered.filter(Boolean).length + " / 3";
+  }
+}
+
+function resetQuiz() {
+  score = 0;
+  answered = [false, false, false];
+
+  for (let i = 0; i < 3; i++) {
+    document.getElementById("feedback" + i).textContent =
+      "Choose an answer to investigate the case.";
+  }
+
+  updateResults();
+}
+</script>
+
+</body>
+</html>
